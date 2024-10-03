@@ -1,0 +1,54 @@
+7.Akhir-akhir ini seringkali terjadi serangan brainrot ke DNS Server Utama, sebagai tindakan antisipasi kamu diperintahkan untuk membuat DNS Slave di Majapahit untuk semua domain yang sudah dibuat sebelumnya yang mengarah ke Sriwijaya.
+
+pada sriwijaya kita tambahkan konfigurasi pada named.conf.local seperti dibawah:
+
+zone "sudarsana.it37.com" {
+        type master;
+        notify yes;
+        also-notify { 192.235.2.3; };
+        allow-transfer { 192.235.2.3; };
+        file "/etc/bind/jarkom/sudarsana.it37.com";
+};
+
+zone "pasopati.it37.com" {
+        type master;
+        notify yes;
+        also-notify { 192.235.2.3; };
+        allow-transfer { 192.235.2.3; };
+        file "/etc/bind/jarkom/pasopati.it37.com";
+};
+
+zone "rujapala.it37.com" {
+        type master;
+        notify yes;
+        also-notify { 192.235.2.3; };
+        allow-transfer { 192.235.2.3; }; 
+        file "/etc/bind/jarkom/rujapala.it37.com";
+};
+
+pada majapahit kita masuk ke /etc/bind/named.conf.local
+lalu menambah konfigurasi dibawah:
+
+zone "sudarsana.it37.com" {
+	type master;
+	masters { 192.235.1.3; };
+	file "/etc/bind/jarkom/sudarsana.it37.com";
+};
+
+zone "pasopati.it37.com" {
+	type master;
+	masters { 192.235.1.3; };
+	file "/etc/bind/jarkom/pasopati.it37.com";
+}; 
+
+zone "rujapala.it37.com" {
+	type slave;
+	masters { 192.235.1.3; };
+	file "/etc/bind/jarkom/rujapala.it37.com";
+}; 
+
+zone "1.235.192.in-addr.arpa" {
+  	type slave;
+	masters { 192.235.1.3; };
+  	file "/etc/bind/jarkom/1.235.192.in-addr.arpa";
+};

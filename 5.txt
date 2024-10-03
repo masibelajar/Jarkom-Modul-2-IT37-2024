@@ -1,0 +1,3 @@
+5.Pastikan domain-domain tersebut dapat diakses oleh seluruh komputer (client) yang berada di Nusantara.
+
+ping google.com -c 5 pada setiap client
