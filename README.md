@@ -113,6 +113,7 @@ iface eth0 inet static
 #### Untuk mempersiapkan peperangan World War MMXXIV (Iya sebanyak itu), Sriwijaya membuat dua kotanya menjadi web server yaitu Tanjungkulai, dan Bedahulu, serta Sriwijaya sendiri akan menjadi DNS Master. Kemudian karena merasa terdesak, Majapahit memberikan bantuan dan menjadikan kerajaannya (Majapahit) menjadi DNS Slave. 
 
 pertama install bind9 dan dnsutils pada sriwijaya
+
 buat domain : mkdir /etc/bind/jarkom
 	            nano /etc/bind/jarkom/it37.com
        
@@ -176,6 +177,7 @@ nameserver 192.168.122.1
 ### + Markas pusat meminta dibuatnya domain khusus untuk menaruh informasi persenjataan dan suplai yang tersebar. Informasi dan suplai meme terbaru tersebut mengarah ke Tanjungkulai dan domain yang ingin digunakan adalah rujapala.xxxx.com dengan alias www.rujapala.xxxx.com.
 
 di sriwijaya nano /etc/bind/named.conf.local
+
 lalu konfigurasi ini:
 ```
 zone "sudarsana.it37.com" {
@@ -197,6 +199,7 @@ zone "rujapala.it37.com" {
 }; 
 ```
 nano /etc/bind/jarkom/sudarsana.it37.com
+
 lalu tambahkan konfigurasi seperti ini:
 ```
 ;
@@ -215,6 +218,7 @@ $TTL    604800
 www 	  IN      CNAME   sudarsana.it37.com.
 ```
 nano /etc/bind/jarkom/pasopati.it37.com
+
 lalu tambahkan konfigurasi seperti ini:
 ```
 ;
@@ -233,6 +237,7 @@ $TTL    604800
 www	    IN      CNAME   pasopati.it37.com.
 ```
 nano /etc/bind/jarkom/rajapala.it37.com
+
 lalu tambahkan konfigurasi seperti ini:
 ```
 ;
@@ -262,6 +267,7 @@ ping rujapala.it37.com
 ### Beberapa daerah memiliki keterbatasan yang menyebabkan hanya dapat mengakses domain secara langsung melalui alamat IP domain tersebut. Karena daerah tersebut tidak diketahui secara spesifik, pastikan semua komputer (client) dapat mengakses domain pasopati.xxxx.com melalui alamat IP Kotalingga (Notes: menggunakan pointer record).
 
 di sriwijaya kita masuk ke /etc/bind/named.conf.local
+
 tambahkan konfigurasi reverse dns:
 ```
 zone "1.235.192.in-addr.arpa" {
@@ -321,6 +327,7 @@ zone "rujapala.it37.com" {
 service bind9 restart
 ```
 pada majapahit kita masuk ke /etc/bind/named.conf.local
+
 lalu menambah konfigurasi dibawah:
 ```
 zone "sudarsana.it37.com" {
@@ -378,6 +385,7 @@ service bind9 restart
 ### Karena terjadi serangan DDOS oleh shikanoko nokonoko koshitantan (NUN), sehingga sistem komunikasinya terhalang. Untuk melindungi warga, kita diperlukan untuk membuat sistem peringatan dari siren man oleh Frekuensi Freak dan memasukkannya ke subdomain panah.pasopati.xxxx.com dalam folder panah dan pastikan dapat diakses secara mudah dengan menambahkan alias www.panah.pasopati.xxxx.com dan mendelegasikan subdomain tersebut ke Majapahit dengan alamat IP menuju radar di Kotalingga.
 
 disriwijaya
+
 pertama kita menambahkan config /etc/bind/jarkom/pasopati.it37.com
 ```
 ;
@@ -416,6 +424,7 @@ lalu juga config pada /etc/bind/named.conf.options
         listen-on-v6 { any; };
 ```
 setelah itu mkdir /etc/bind/panah
+
 lalu buat config pada /etc/bind/panah/panah.pasopati.it37.com
 ```
 ;
@@ -438,7 +447,8 @@ www     IN      CNAME   panah.pasopati.it37.com.
 ### Markas juga meminta catatan kapan saja meme brain rot akan dijatuhkan, maka buatlah subdomain baru di subdomain panah yaitu log.panah.pasopati.xxxx.com serta aliasnya www.log.panah.pasopati.xxxx.com yang juga mengarah ke Kotalingga.
 
 pertama pada majapahit kita masuk /etc/bind/named.conf.local
-mengconfig tambahan :
+
+menambahkan config :
 ```
 zone "log.panah.pasopati.it37.com" {
         type master;
@@ -446,6 +456,7 @@ zone "log.panah.pasopati.it37.com" {
 };
 ```
 tambah folder /etc/bind/panah
+
 lalu menambahkan config baru pada /etc/bind/panah/log.panah.pasopati.it37.com
 ```
 ;
