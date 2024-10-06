@@ -170,11 +170,11 @@ nameserver 192.168.122.1
 ```
 
 ## No.2-4
-### >Karena para pasukan membutuhkan koordinasi untuk melancarkan serangannya, maka buatlah sebuah domain yang mengarah ke Solok dengan alamat sudarsana.xxxx.com dengan alias www.sudarsana.xxxx.com, dimana xxxx merupakan kode kelompok. Contoh: sudarsana.it01.com.
+#### >Karena para pasukan membutuhkan koordinasi untuk melancarkan serangannya, maka buatlah sebuah domain yang mengarah ke Solok dengan alamat sudarsana.xxxx.com dengan alias www.sudarsana.xxxx.com, dimana xxxx merupakan kode kelompok. Contoh: sudarsana.it01.com.
 
-### >Para pasukan juga perlu mengetahui mana titik yang akan diserang, sehingga dibutuhkan domain lain yaitu pasopati.xxxx.com dengan alias www.pasopati.xxxx.com yang mengarah ke Kotalingga.
+#### >Para pasukan juga perlu mengetahui mana titik yang akan diserang, sehingga dibutuhkan domain lain yaitu pasopati.xxxx.com dengan alias www.pasopati.xxxx.com yang mengarah ke Kotalingga.
 
-### >Markas pusat meminta dibuatnya domain khusus untuk menaruh informasi persenjataan dan suplai yang tersebar. Informasi dan suplai meme terbaru tersebut mengarah ke Tanjungkulai dan domain yang ingin digunakan adalah rujapala.xxxx.com dengan alias www.rujapala.xxxx.com.
+#### >Markas pusat meminta dibuatnya domain khusus untuk menaruh informasi persenjataan dan suplai yang tersebar. Informasi dan suplai meme terbaru tersebut mengarah ke Tanjungkulai dan domain yang ingin digunakan adalah rujapala.xxxx.com dengan alias www.rujapala.xxxx.com.
 
 di sriwijaya nano /etc/bind/named.conf.local
 
@@ -196,7 +196,9 @@ zone "rujapala.it37.com" {
 	type master;
 	notify yes;
 	file "/etc/bind/jarkom/rujapala.it37.com";
-}; 
+};
+
+service bind9 restart
 ```
 nano /etc/bind/jarkom/sudarsana.it37.com
 
@@ -216,6 +218,8 @@ $TTL    604800
 @       IN      NS      sudarsana.it37.com.
 @       IN      A       192.235.2.2       ; IP Solok
 www 	  IN      CNAME   sudarsana.it37.com.
+
+serivce bind9 restart
 ```
 nano /etc/bind/jarkom/pasopati.it37.com
 
@@ -235,6 +239,8 @@ $TTL    604800
 @       IN      NS      pasopati.it37.com.
 @       IN      A       192.235.1.6       ; IP Kotalingga
 www	    IN      CNAME   pasopati.it37.com.
+
+serivce bind9 restart
 ```
 nano /etc/bind/jarkom/rajapala.it37.com
 
@@ -254,9 +260,11 @@ $TTL    604800
 @       IN      NS      rujapala.it37.com.
 @       IN      A       192.235.1.4       ; IP Tanjungkulai
 www	    IN      CNAME   rujapala.it37.com.
+
+serivce bind9 restart
 ```
 ## No.5
-### Pastikan domain-domain tersebut dapat diakses oleh seluruh komputer (client) yang berada di Nusantara.
+#### Pastikan domain-domain tersebut dapat diakses oleh seluruh komputer (client) yang berada di Nusantara.
 ```
 ping sudarsana.it237.com
 ping pasopati.it37.com
@@ -264,7 +272,7 @@ ping rujapala.it37.com
 ```
 
 ## No.6
-### Beberapa daerah memiliki keterbatasan yang menyebabkan hanya dapat mengakses domain secara langsung melalui alamat IP domain tersebut. Karena daerah tersebut tidak diketahui secara spesifik, pastikan semua komputer (client) dapat mengakses domain pasopati.xxxx.com melalui alamat IP Kotalingga (Notes: menggunakan pointer record).
+#### Beberapa daerah memiliki keterbatasan yang menyebabkan hanya dapat mengakses domain secara langsung melalui alamat IP domain tersebut. Karena daerah tersebut tidak diketahui secara spesifik, pastikan semua komputer (client) dapat mengakses domain pasopati.xxxx.com melalui alamat IP Kotalingga (Notes: menggunakan pointer record).
 
 di sriwijaya kita masuk ke /etc/bind/named.conf.local
 
@@ -290,13 +298,15 @@ $TTL    604800
 ;
 @       IN      NS      pasopati.it37.com.
 6	IN	NS	pasopati.it37.com.
+
+serive bind9 restart
 ```
 
 lalu pada setiap client kita install dnsutils
 ```apt install dnsutils -y```
 
 ### No.7
-### Akhir-akhir ini seringkali terjadi serangan brainrot ke DNS Server Utama, sebagai tindakan antisipasi kamu diperintahkan untuk membuat DNS Slave di Majapahit untuk semua domain yang sudah dibuat sebelumnya yang mengarah ke Sriwijaya.
+#### Akhir-akhir ini seringkali terjadi serangan brainrot ke DNS Server Utama, sebagai tindakan antisipasi kamu diperintahkan untuk membuat DNS Slave di Majapahit untuk semua domain yang sudah dibuat sebelumnya yang mengarah ke Sriwijaya.
 
 pada sriwijaya kita tambahkan konfigurasi pada named.conf.local seperti dibawah:
 ```
@@ -358,7 +368,7 @@ service bind9 restart
 ```
 
 ## No.8
-### Kamu juga diperintahkan untuk membuat subdomain khusus melacak kekuatan tersembunyi di Ohio dengan subdomain cakra.sudarsana.xxxx.com yang mengarah ke Bedahulu.
+#### Kamu juga diperintahkan untuk membuat subdomain khusus melacak kekuatan tersembunyi di Ohio dengan subdomain cakra.sudarsana.xxxx.com yang mengarah ke Bedahulu.
 
 pada sriwijaya menambahkan config di /etc/bind/jarkom/sudarsana.it37.com
 ```
@@ -382,7 +392,7 @@ service bind9 restart
 ```
 
 ## No.9
-### Karena terjadi serangan DDOS oleh shikanoko nokonoko koshitantan (NUN), sehingga sistem komunikasinya terhalang. Untuk melindungi warga, kita diperlukan untuk membuat sistem peringatan dari siren man oleh Frekuensi Freak dan memasukkannya ke subdomain panah.pasopati.xxxx.com dalam folder panah dan pastikan dapat diakses secara mudah dengan menambahkan alias www.panah.pasopati.xxxx.com dan mendelegasikan subdomain tersebut ke Majapahit dengan alamat IP menuju radar di Kotalingga.
+#### Karena terjadi serangan DDOS oleh shikanoko nokonoko koshitantan (NUN), sehingga sistem komunikasinya terhalang. Untuk melindungi warga, kita diperlukan untuk membuat sistem peringatan dari siren man oleh Frekuensi Freak dan memasukkannya ke subdomain panah.pasopati.xxxx.com dalam folder panah dan pastikan dapat diakses secara mudah dengan menambahkan alias www.panah.pasopati.xxxx.com dan mendelegasikan subdomain tersebut ke Majapahit dengan alamat IP menuju radar di Kotalingga.
 
 disriwijaya
 
@@ -441,10 +451,12 @@ $TTL    604800
 @       IN      NS      panah.pasopati.it37.com.
 @       IN      A       192.235.1.6     ; IP Kotalingga
 www     IN      CNAME   panah.pasopati.it37.com.
+
+service bind9 restart
 ```
 
 ## No.10
-### Markas juga meminta catatan kapan saja meme brain rot akan dijatuhkan, maka buatlah subdomain baru di subdomain panah yaitu log.panah.pasopati.xxxx.com serta aliasnya www.log.panah.pasopati.xxxx.com yang juga mengarah ke Kotalingga.
+#### Markas juga meminta catatan kapan saja meme brain rot akan dijatuhkan, maka buatlah subdomain baru di subdomain panah yaitu log.panah.pasopati.xxxx.com serta aliasnya www.log.panah.pasopati.xxxx.com yang juga mengarah ke Kotalingga.
 
 pertama pada majapahit kita masuk /etc/bind/named.conf.local
 
@@ -475,4 +487,6 @@ $TTL    604800
 www     IN      CNAME   log.panah.pasopati.it37.com.
 log	    IN	    A	      192.235.1.6	; IP Kotalingga
 www.log	IN	    CNAME	  log.panah.pasopati.it37.com
+
+service bind9 restart
 ```
