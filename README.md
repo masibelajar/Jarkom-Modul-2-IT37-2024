@@ -3,7 +3,7 @@
 Sebuah kerajaan besar di Indonesia sedang mengalami pertempuran dengan penjajah. Kerajaan tersebut adalah Sriwijaya. Karena merasa terdesak Sriwijaya meminta bantuan pada Majapahit untuk mempertahankan wilayahnya. Pertempuran besar tersebut berada di Nusantara. 
 
 ## Topologi:  
-![App Screenshot](  )
+![App Screenshot](https://github.com/masibelajar/Jarkom-Modul2_IT37-20244/blob/main/img/Topologi.png)
 
 ## Konfigurasi
 Konfigurasi Network di Nusantara
